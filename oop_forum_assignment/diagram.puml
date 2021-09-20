@@ -1,0 +1,54 @@
+@startuml
+class forum {
+pages
+users
+addUser()
+addPage()
+}
+
+class page {
+title
+posts
+addPost()
+}
+
+class user {
+username
+createPost()
+createComment()
+}
+
+
+class post {
+title
+date
+author
+text
+comments
+addComment()
+}
+
+class poll {
+title
+date
+author
+text
+comments
+options
+addComment()
+incrementOption()
+}
+
+class comment {
+date
+author
+text
+}
+
+
+forum o-- "0..*" page
+forum o-- "0..*" user
+page o-- "0..*" post
+post o-- "0..*" comment
+post <-- poll
+@enduml
