@@ -49,8 +49,20 @@ test('newComment adds comment to comments object', () => {
         text: 'This is a testPost',
         author: testUser
     }) 
-    const testComment = testPost.newComment({text: 'This is a test comment.', author: testUser})
+    const testComment = testPost.newComment({user:testUser, data: {text: 'This is a test comment.' }})
     expect(testPost.comments[testComment.id]).toEqual(testComment)
+})
+
+test('deleteComment removes comment from comments object', () => {
+    const testUser = new User('Test User')
+    const testPost = new Post({
+        title: 'Test Title',
+        text: 'This is a testPost',
+        author: testUser
+    }) 
+    const testComment = testPost.newComment({user:testUser, data: {text: 'This is a test comment.' }})
+    testPost.deleteComment({user:testUser,id:testComment.id})
+    expect(testPost.comments[testComment.id]).toEqual(undefined)
 })
 
 test('upvotes initialized as empty hash table', () => {
